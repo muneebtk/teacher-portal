@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
+
+<div class="login-container" style="width: 450px;">
+    <h1>Login</h1>
+    <form id="loginForm">
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit">Sign In</button>
+        <div class="forgot-password">Don't have an account?
+            <a href="/accounts/signup/">Signup</a>
+        </div>
+    </form>
+    <div id="errorMessage" style="color: red; margin-top: 15px; display: none;"></div>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        fetch('/accounts/signin/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: new URLSearchParams({ email, password })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Redirect to the dashboard
+                    window.location.href = data.redirect_url;
+                } else {
+                    // Show error message
+                    document.getElementById('errorMessage').textContent = data.message;
+                }
+            })
+    });
+</script>
+{% endblock %}

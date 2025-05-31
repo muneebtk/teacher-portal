@@ -1,0 +1,155 @@
+#studentTable{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px;
+}
+#content-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add_student {
+    background-color: black;
+    color: white;
+    font-size: 1 rem;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.add_student:hover {
+    background-color: #333;
+    /* Darker shade on hover */
+}
+
+/* popup */
+/* Popup background overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup container */
+.popup {
+    background-color: white;
+    padding: 2rem;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-group button {
+    background-color: black;
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.form-group button:hover {
+    background-color: #333;
+}
+
+/* table actions */
+.dropdown-container {
+    position: relative !important;
+    display: inline-block !important;
+}
+
+.dropdown-btn {
+    background: #000 !important;
+    /* black background */
+    color: #fff !important;
+    /* white text */
+    border: none !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    user-select: none !important;
+    border-radius: 0 !important;
+    /* no border radius */
+}
+
+.down-arrow {
+    font-size: 12px !important;
+    pointer-events: none !important;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    min-width: 120px !important;
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    display: none;
+    z-index: 9999 !important;
+}
+
+.dropdown-item {
+    padding: 8px 12px !important;
+    cursor: pointer !important;
+}
+
+.dropdown-item:hover {
+    background-color: #eee !important;
+}
+td,
+th {
+    overflow: visible !important;
+}
