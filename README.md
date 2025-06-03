@@ -9,7 +9,6 @@ This project implements a student management system using Django for the backend
 1. **Student CRUD Operations**:
 
    * Create, Read, Update, and Delete students.
-   * Dynamic inline editing of student data.
 2. **User Authentication**:
 
    * Login and Logout functionality.
@@ -101,11 +100,5 @@ The frontend uses vanilla JavaScript and CSS. There are no additional setup step
 * Ensure CSRF tokens are included in all POST requests to the backend.
 * Update `settings.py` for any environment-specific configurations.
 
-## Future Enhancements
-
-* Implement role-based access control.
-* Add unit tests for backend views and frontend scripts.
-* Improve the UI design using a CSS framework like Bootstrap or Tailwind CSS.
-* Enhance the frontend using modern JavaScript frameworks like React or Angular.
 
 
