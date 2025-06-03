@@ -1,12 +1,13 @@
+import json
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-import json
 from .models import Student
 from .serializers import StudentSerializer
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 
 
 @login_required(login_url='/accounts/signin/')
@@ -30,12 +31,28 @@ def students_view(request):
             })
     
     elif request.method == 'POST':
-        # Create new student
+        # Create new student or update existing one
         try:
             data = json.loads(request.body)
             serializer = StudentSerializer(data=data)
             if serializer.is_valid():
-                serializer.save(teacher=user)
+                # Attempt to update the record
+                updated_count = Student.objects.filter(
+                    name=serializer.validated_data['name'],
+                    subject=serializer.validated_data['subject'],
+                    teacher=user
+                ).update(
+                    mark=F('mark') + serializer.validated_data['mark']
+                )
+
+                # If no record was updated, create a new one
+                if updated_count == 0:
+                    Student.objects.create(
+                        name=serializer.validated_data['name'],
+                        subject=serializer.validated_data['subject'],
+                        mark=serializer.validated_data['mark'],
+                        teacher=user
+                    )
                 return JsonResponse({
                     'student': serializer.data,
                     'message': 'Student created successfully'

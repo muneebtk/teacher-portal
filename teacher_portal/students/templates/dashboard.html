@@ -182,7 +182,7 @@
 
 
     // api calls
-    function fetchStudents() {
+   function fetchStudents() {
         fetch('/students/students/', {
             method: 'GET',
             headers: {
@@ -205,12 +205,43 @@
             })
             .then(function (data) {
                 if (data) {
-                    displayStudents(data);
+                    updateTable(data); // Update the table with new data
                 }
             })
             .catch(function (error) {
+                console.error('Error fetching students:', error);
             });
     }
+
+    function updateTable(students) {
+        const tableBody = document.querySelector('#studentTable tbody');
+        let tableRows = '';
+
+        students.forEach(student => {
+            tableRows += `
+            <tr>
+                <td class="editable" data-field="name">${student.name}</td>
+                <td class="editable" data-field="subject">${student.subject}</td>
+                <td class="editable" data-field="mark">${student.mark}</td>
+                <td>
+                    <div class="dropdown-container">
+                        <button id="dropdownBtn1_${student.id}" class="dropdown-btn"
+                            onclick="showDropdown1(event, ${student.id})">
+                            <span class="down-arrow">&#9662;</span>
+                        </button>
+                        <div id="dropdownMenu1_${student.id}" class="dropdown-menu">
+                            <div class="dropdown-item" onclick="showPopup(${JSON.stringify(student)})">Edit</div>
+                            <div class="dropdown-item" onclick="deleteStudent(${student.id})">Delete</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        `;
+        });
+
+        tableBody.innerHTML = tableRows; // Update the table body with new rows
+    }
+
 
     function createStudent(studentData) {
         fetch('/students/students/', {
